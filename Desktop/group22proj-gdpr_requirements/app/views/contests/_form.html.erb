@@ -1,0 +1,91 @@
+<%= form_with(model: contest, local: true) do |form| %>
+  <% if contest.errors.any? %>
+    <div id="error_explanation">
+
+      <h2><%= pluralize(contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+
+      <ul>
+        <% contest.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :category %>
+    <%= form.select :category, ["Art & Illustration",
+                                "Music & Audio",
+                                "Programming & Tech",
+                                "Video & Animation",
+                                "Graphics & Design",
+                                "Marketing",
+                                "Writing",
+                                "Lifestyle",
+                                "Translation",
+                                "Non-Profit",
+                                "Other"], class: "form-control", disabled: contest.paid_for %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, placeholder: "Enter a title for your contest", class: "form-control", disabled: contest.paid_for%>
+  </div>
+
+
+  <div class="field" style="display:none;">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, placeholder: "Describe your contest include instructions for uploading submissions...", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Payout Amount: (£)" %>
+    <%= form.number_field :payout_amount, step: 0.01, value: '%.2f' % (contest.payout_amount.to_i / 100.0), class: "form-control", disabled: contest.payout_amount != 0 %>
+  </div>
+
+  <div class="prizes">
+    <div class="font-weight-bold indigo-text mr-2 mt-1">1st Prize (£):
+      <%= form.number_field :first_prize, step: 0.01, class: "form-control mb-1", value: '%.2f' % (contest.first_prize.to_i / 100.0) %>
+    </div>
+  </div>
+
+  <div class="prizes">
+    <div class="font-weight-bold indigo-text mr-2 mt-1">2nd Prize (£):
+      <%= form.number_field :second_prize, step: 0.01, class: "form-control", value: '%.2f' % (contest.second_prize.to_i / 100.0) %>
+    </div>
+  </div>
+
+  <div class="prizes">
+    <div class="font-weight-bold indigo-text mr-2 ">3rd Prize (£):
+      <%= form.number_field :third_prize, step: 0.01, class: "form-control", value: '%.2f' % (contest.third_prize.to_i / 100.0) %>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :start_date %>
+    <%= form.datetime_select :start_date, disabled: contest.paid_for, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :ending_date %>
+    <%= form.datetime_select :ending_date, disabled: contest.paid_for, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label "Student Only?" %>
+    <%= form.check_box :is_student_only, disabled: contest.paid_for%>
+  </div>
+
+  <%= form.submit "Save Contest", class: "btn btn-success" %>
+  <%= link_to "Delete", contest, method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+
+
+<% end %>
+

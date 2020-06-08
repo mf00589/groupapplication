@@ -1,0 +1,79 @@
+// Place all the styles related to the Contests controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.card-text{
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  display: block;
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 4.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: medium;
+}
+
+.card-subtitle{
+  font-family: 'Nunito', sans-serif;
+  font-size: small;
+  font-weight: 300;
+}
+
+
+#watch-button{
+  margin-top: .25rem;
+  margin-bottom: .5rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+#card-video{
+  margin-top: 1rem;
+}
+
+.video-title{
+  display: block;
+  display: -webkit-box;
+  max-width: 100%;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.5rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.badge-ending-date{
+  color: #000000;
+  background-color: #ffffff;
+  font-family: monospace;
+  padding: .3rem;
+  font-weight: 600;
+  font-size: medium;
+  border-radius: .3rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+
+.badge-price{
+  color: #379e54;
+  background-color: #def9d2;
+  font-family: 'Nunito', sans-serif;
+  padding-top: .3rem;
+  padding-bottom: .3rem;
+  font-weight: 400;
+  font-size: medium;
+  border-radius: .3rem;
+  margin-top: 1rem;
+}
+
+
+.prizes{
+  margin-bottom: 1rem;
+}
+
+
+

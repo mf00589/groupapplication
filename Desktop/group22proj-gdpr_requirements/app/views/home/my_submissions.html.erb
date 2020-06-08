@@ -1,0 +1,143 @@
+<div class="page-heading">
+  <h2>Account Summary</h2>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-md-6 p-1 mt-1">
+    <div class="card border-white">
+      <div class="card text-white bg-dark">
+        <div class="row">
+          <div class="col-4 text-center mt-4">
+            <i class="fas fa-pound-sign fa-5x"></i>
+          </div>
+          <div class="col-7 text-center summary-texts pt-4 pb-3">
+            <h1><%= number_to_currency(@total_earnings, unit: "£", separator: ".", delimiter: ",") %></h1>
+            <h4><strong>TOTAL EARNINGS</strong></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6 p-1 mt-1">
+    <div class="card border-white">
+      <div class="card text-white bg-dark">
+        <div class="row">
+          <div class="col-5 text-center pr-2 mt-4">
+            <i class="fas fa-users fa-5x"></i>
+          </div>
+          <div class="col-6 text-center summary-texts pt-4 pb-3">
+            <h1><%= current_user.created_at.strftime("%m/%d/%Y") %></h1>
+            <h4><strong>JOIN DATE</strong></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-heading mt-5">
+  <h2>My Submissions</h2>
+</div>
+
+<% if !@waiting_for_vendor.empty? %>
+  <div class="page-heading mt-3">
+    <h5>Waiting For Evaluation: <%= @waiting_for_vendor.size %>
+      <strong> contest(s) have ended and are waiting to be evaluated!</strong></h5>
+  </div>
+  <div class="row">
+    <% @waiting_for_vendor.each do |contest| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-3 mb-1">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= contest.name %></h5>
+            <p>
+              <h6 class="card-subtitle mb-2 text-muted ">created by: <%= contest.user.username %></h6>
+            </p>
+            <p class="card-text"><%= contest.description %></p>
+            <div>
+              <span class="badge badge-price p-2 mt-2">£<%= number_with_delimiter(contest.show_payout, :delimiter => ',', :precision => '2') %></span>
+              <% if contest.is_student_only == true %>
+                <span class="badge badge-primary p-2 mt-2" style="color: white "><strong>Students Only</strong></span>
+              <% end %>
+            </div>
+            <p class="badge-ending-date">Ends on: <%= contest.ending_on %></span></p>
+            <% if current_user %>
+              <% if (contest.ending_date <= Date.today() - 7) && !contest.evaluated %>
+                <%= link_to "Contact Support for Ranking!", contest, class: "btn btn-danger w-100" %>
+              <% else %>
+                <%= link_to "View", contest, class: "btn btn-secondary w-100" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if !@currently_entered_in.empty? %>
+  <div class="page-heading mt-3">
+    <h5>Currently Entered in: <%= @currently_entered_in.size %> Contests</h5>
+  </div>
+  <div class="row">
+    <% @currently_entered_in.each do |contest| %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-3 mb-1">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= contest.name %></h5>
+            <p>
+              <h6 class="card-subtitle mb-2 text-muted ">created by: <%= contest.user.username %></h6>
+            </p>
+            <p class="card-text"><%= contest.description %></p>
+            <div>
+              <span class="badge badge-price p-2 mt-2">£<%= number_with_delimiter(contest.show_payout, :delimiter => ',', :precision => '2') %></span>
+              <% if contest.is_student_only == true %>
+                <span class="badge badge-primary p-2 mt-2" style="color: white "><strong>Students Only</strong></span>
+              <% end %>
+            </div>
+            <p class="badge-ending-date">Ends on: <%= contest.ending_on %></span></p>
+            <% if current_user %>
+              <%= link_to "View", contest, class: "btn btn-secondary w-100" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if !@contests_won.empty? %>
+  <div class="page-heading mt-3">
+    <h5>Contests Won: <%= @contests_won.size %></h5>
+  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Contest</th>
+      <th scope="col">Title</th>
+      <th scope="col">Place</th>
+      <th scope="col">Payout</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @contests_won.each do |contest| %>
+      <tr>
+        <td><%= link_to "View", contest, class: "btn btn-secondary download" %></td>
+        <td><%= contest.name %></td>
+        <% if contest.first_place == current_user.id %>
+          <td>1st</td>
+          <td>£<%= number_with_delimiter(contest.show_first_prize, :delimiter => ',', :precision => '2') %></td>
+        <% elsif contest.second_place == current_user.id %>
+          <td>2nd</td>
+          <td>£<%= number_with_delimiter(contest.show_second_prize, :delimiter => ',', :precision => '2') %></td>
+        <% else %>
+          <td>3rd</td>
+          <td>£<%= number_with_delimiter(contest.show_third_prize, :delimiter => ',', :precision => '2') %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to "Delete Account Here", registration_path(current_user), class: "cancel-link", style: "color: red", data: {confirm: "Are you sure?"}, method: :delete %>

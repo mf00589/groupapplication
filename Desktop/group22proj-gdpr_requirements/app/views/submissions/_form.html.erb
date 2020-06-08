@@ -1,0 +1,28 @@
+<%= form_with(model: [@contest, submission], local: true) do |form| %>
+
+  <% if submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(submission.errors.count, "error") %> prohibited this submission from being saved:</h2>
+
+      <ul>
+        <% submission.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+  <%= form.hidden_field :contest_id %>
+
+  <div class="custom-file">
+    <%= form.label :attachment%>
+    <%= form.file_field :attachment %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit "Submit", class: "btn btn-primary", id: "upload-submission"%>
+  </div>
+<% end %>

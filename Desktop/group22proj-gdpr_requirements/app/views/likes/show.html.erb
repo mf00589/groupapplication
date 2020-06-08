@@ -1,0 +1,12 @@
+<p>
+  <strong>Submissionid:</strong>
+  <%= @like.submissionid %>
+</p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @like.userid %>
+</p>
+
+<%= link_to 'Edit', edit_like_path(@like) %> |
+<%= link_to 'Back', likes_path %>

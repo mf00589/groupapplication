@@ -1,0 +1,7 @@
+<li>
+  <div class="row <%= user.id == message.user_id ? 'justify-content-end' : '' %>">
+    <div class="<%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
+      <%= message.body %>
+    </div>
+  </div>
+</li>

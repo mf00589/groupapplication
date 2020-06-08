@@ -1,0 +1,51 @@
+<div class="bg-image"></div>
+<%= render 'cookies_eu/consent_banner' %>
+<div class="summary-container">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 p-1 mt-1">
+      <div class="card border-white">
+        <div class="card text-white bg-dark">
+          <div class="row">
+            <div class="col-4 text-center mt-4">
+              <i class="fas fa-pound-sign fa-5x"></i>
+            </div>
+            <div class="col-7 text-center summary-texts pt-4 pb-4">
+              <h1><%= number_to_currency(@total_payout, unit: "£", separator: ".", delimiter: ",") %></h1>
+              <h3><strong>TOTAL PAID OUT</strong></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 p-1 mt-1">
+      <div class="card border-white">
+        <div class="card text-white bg-dark">
+          <div class="row">
+            <div class="col-4 text-center mt-4">
+              <i class="fas fa-trophy fa-5x"></i>
+            </div>
+            <div class="col-7 text-center summary-texts pt-4 pb-4">
+              <h1><%=@contests_evaluated.size %></h1>
+              <h3><strong>CONTESTS FULFILLED</strong></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-6 p-1 mt-1">
+      <div class="card border-white">
+        <div class="card text-white bg-dark">
+          <div class="row">
+            <div class="col-4 text-center mt-4">
+              <i class="fas fa-clock fa-5x"></i>
+            </div>
+            <div class="col-7 text-center summary-texts pt-4 pb-4">
+              <h1><%=@ongoing_contests.size %></h1>
+              <h3><strong>ONGOING CONTESTS</strong></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

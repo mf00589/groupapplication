@@ -1,0 +1,11 @@
+<div>
+  <%= link_to "Back to Contests", contests_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="page-heading">
+  <h2>Create Contest</h2>
+</div>
+
+<%= render 'form', contest: @contest %>
+
+<%= link_to 'Back', contests_path %>

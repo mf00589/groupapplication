@@ -1,0 +1,15 @@
+class VideoUpload < ActiveType::Object
+  attribute :file, :string
+  attribute :title, :string
+  attribute :description, :text
+
+  validates :file, presence: true
+  validates :title, presence: true
+
+  belongs_to :contest
+
+  def upload!(user1)
+  account = Yt::Account.new access_token: user1.token
+  account.upload_video self.file, title: self.title, description: self.description
+  end
+end

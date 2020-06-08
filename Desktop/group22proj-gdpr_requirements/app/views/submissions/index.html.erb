@@ -1,0 +1,44 @@
+<div class="page-heading">
+  <h2>Current Submissions</h2>
+</div>
+
+<% if current_user && current_user != @contest.user && !@contest.has_ended %>
+  <% if @user_submission.empty? %>
+    <%= link_to 'Upload a Submission to Enter', new_contest_submission_path, class: "btn btn-primary mt-1 mb-1" %>
+  <% else %>
+    <h6><strong>You are already entered into this contest. Please delete your current submission to upload
+      a different one.</strong></h6>
+  <% end %>
+<% end %>
+
+
+<div class="submissions-table">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Username</th>
+      <th scope="col">Submission Date</th>
+      <th scope="col">View</th>
+      <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% @submissions.each do |submission| %>
+      <tr>
+        <td><%= submission.id %></td>
+        <td><%= submission.user.username %></td>
+        <td><%= submission.created_at.strftime("%d/%m/%Y") %></td>
+        <% if current_user && current_user == submission.user %>
+          <td><%= link_to "Download", submission.attachment_url, class: "btn btn-secondary download" %></td>
+          <td> <%= link_to "Remove", contest_submission_path(id: submission.id), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %></td>
+        <% else %>
+          <td>No Permission</td>
+          <td>No Permission</td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

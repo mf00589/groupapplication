@@ -1,0 +1,11 @@
+<footer class="footer">
+  <!-- if user is logged in, displays footer text in the footer -->
+  <% if current_user %>
+      <span class="text-muted"><%= t('application._footer.logged_in_message') %>
+      </span>
+    <%= link_to "Privacy Policy", "/docs/privacy-policy.pdf", target: "_blank" %>
+  <% else %>
+    <span class="text-muted">Login to begin entering or creating contests!</span>
+  <% end %>
+</footer>
+

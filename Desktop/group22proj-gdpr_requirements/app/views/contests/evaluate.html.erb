@@ -1,0 +1,59 @@
+<div>
+  <%= link_to "Back to Contests", contests_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="page-heading">
+  <h2>Evaluating Contest</h2>
+</div>
+
+
+<%= form_for :contest, url: contest_evaluate_path do |form| %>
+
+  <div class="font-weight-bold indigo-text mr-2 mt-1">1st Place:</div>
+
+  <div class="form-group">
+    <%= form.select(:first_place, @submissions.collect { |s| [s.user.username, s.user.id] }, {}, class: "form-control", id: 'first-place-select') %>
+  </div>
+
+  <% if @submissions.size >= 2 %>
+    <div class="font-weight-bold indigo-text mr-2 mt-1">2nd Place:</div>
+    <div class="form-group">
+      <%= form.select(:second_place, @submissions.collect { |s| [s.user.username, s.user.id] }, {}, class: "form-control", id: 'second-place-select') %>
+    </div>
+    <% if @submissions.size >= 3 %>
+      <div class="font-weight-bold indigo-text mr-2 mt-1">3rd Place:</div>
+      <div class="form-group">
+        <%= form.select(:third_place, @submissions.collect { |s| [s.user.username, s.user.id] }, {}, class: "form-control", id: 'third-place-select') %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="submissions-table">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">Submission No.</th>
+        <th scope="col">Username</th>
+        <th scope="col">View</th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <% @submissions.each do |submission| %>
+        <tr>
+          <td><%= submission.id %></td>
+          <td><%= submission.user.username %></td>
+          <td><%= link_to "Download", submission.attachment_url, class: "btn btn-secondary download" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div>
+    <%= form.submit "Submit Payout to Users", class: "btn btn-success" %>
+  </div>
+
+
+<% end %>

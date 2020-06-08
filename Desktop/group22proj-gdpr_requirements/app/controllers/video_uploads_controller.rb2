@@ -1,0 +1,52 @@
+class VideoUploadsController < ApplicationController
+  before_action :set_contest, only:[:new, :create]
+
+  def new
+    # @video_upload = VideoUpload.new
+    @video_upload = @contest.video_uploads.new
+  end
+
+  def create
+    @video_upload = @contest.video_uploads.new(title: params[:video_upload][:title],
+                                  description: params[:video_upload][:description],
+                                  file: params[:video_upload][:file].try(:tempfile).try(:to_path))
+
+    respond_to do |format|
+      if @video_upload.save
+        uploaded_video = @video_upload.upload!(current_yt_user)
+        if uploaded_video.failed?
+          flash[:error] = 'There was an error while uploading your video...'
+        else
+          Video.create({link: "https://www.youtube.com/watch?v=#{uploaded_video.id}"})
+          format.html { redirect_to @contest, notice: 'Your video has been uploaded!' }
+        end
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
+  # if @video_upload.save
+  #   uploaded_video = @video_upload.upload!(current_yt_user)
+  #
+  #   if uploaded_video.failed?
+  #     flash[:error] = 'There was an error while uploading your video...'
+  #   else
+  #     Video.create({link: "https://www.youtube.com/watch?v=#{uploaded_video.id}"})
+  #     flash[:success] = 'Your video has been uploaded!'
+  #   end
+  #   # check if the video was uploaded or not
+  #
+  #   redirect_to root_url
+  # else
+  #   render :new
+  # end
+  # end
+
+  private
+
+  def set_contest
+    @contest = Contest.find_by(id: params[:contest_id]) || Contest.find(video_params[:contest_id])
+  end
+
+end

@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-md navbar-light bg-white border-top my-3 border-bottom my-3">
+  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse3">
+    <ul class="navbar-nav mr-auto float-right ">
+      <!-- display links in header on the left -->
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Art & Illustration", contests_path(category: "Art & Illustration") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Music & Audio", contests_path(category: "Music & Audio") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Programming & Tech", contests_path(category: "Programming & Tech") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Video & Animation", contests_path(category: "Video & Animation") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Graphics & Design", contests_path(category: "Graphics & Design") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Lifestyle", contests_path(category: "Lifestyle") %></a>
+      </li>
+    </ul>
+  </div>
+  <div class="mx-auto order-0">
+    <p class="navbar-brand mx-auto">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse3">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+  </div>
+  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+    <ul class="navbar-nav ml-right">
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Writing", contests_path(category: "Writing") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Translation", contests_path(category: "Translation") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Marketing", contests_path(category: "Marketing") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Non-Profit", contests_path(category: "Non-Profit") %></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" <%= link_to "Other", contests_path(category: "Other") %></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+

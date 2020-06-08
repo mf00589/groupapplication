@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  freelancerid: 1
+  contestid: 1
+  ranking: 1
+  share_of_price: 1.5
+
+two:
+  freelancerid: 1
+  contestid: 1
+  ranking: 1
+  share_of_price: 1.5

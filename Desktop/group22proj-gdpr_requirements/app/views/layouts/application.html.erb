@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= t('title') %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://kit.fontawesome.com/13c06d5c8e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<%= render 'header' %>
+<% if current_page?(contests_path) || current_page?(new_contest_path) %>
+  <%= render 'secondary_header' %>
+<% end %>
+
+
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %>
+
+
+<% if current_page?(root_path) %>
+  <div class="home-container">
+    <%= yield %>
+  </div>
+<% else %>
+  <div class="container">
+    <%= yield %>
+  </div>
+<% end %>
+
+<%= render 'footer' %>
+
+</body>
+
+
+</html>
